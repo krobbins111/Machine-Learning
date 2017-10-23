@@ -109,7 +109,7 @@ def PLalgo(x, y, c):
     return epochcount
 
 
-PLalgo(smart3, effort3, classifier3)
+PLalgo(smart2, effort2, classifier2)
 
 #a way to return the weights. divide from final formula and add to int array
 #along with epoch counter at end of every inner loop

@@ -21,14 +21,23 @@
 #perceptron learn and winnow
 #polynomials?
 
+#import random
+
 #training set 1: No Noise
-smart = [4.4, 2.8, -3, -1.1]
-effort = [4.5, 4, -4, -2.7]
-classifier = [1, 1, 0, 0]
+smart1 = [4.4, 2.8, 3.5, 3.2, -3, -1.1, -4, -2.4]
+effort1 = [4.5, 4, 4.1, 4.9, -4, -2.7, -2.1, -2.5]
+classifier1 = [1, 1, 1, 1, 0, 0, 0, 0]
 
 #training set 2: Boundary cases
+smart2 = [4.4, 2.8, 3.5, 3.2, -3, -1.1, -0.4, 1]
+effort2 = [4.5, 4, 4.1, 4.9, -4, -2.7, 1.3, -1]
+classifier2 = [1, 1, 1, 1, 0, 0, 0, 1]
 
 #training set3: Severe class label noise
+smart3 = [4.4, 2.8, 3.5, -3.2, -3, -1.1, 4.5, -1.5, -3, 4.1]
+effort3 = [4.5, 4, 4.1, -4.9, -4, -2.7, -2, 4.6, -3.5, 4.3]
+classifier3 = [1, 1, 1, 0, 0, 0, 1, 1, 1, 0]
+
 
 #def inc(x, y, t, rate):
  #   i = 0
@@ -47,8 +56,9 @@ classifier = [1, 1, 0, 0]
       #  i += 1
 
 #above functions changed due to use of weights rather than adjusting the vector while testing
+import random
 
-def PLalgo(x, y, c):
+def Walgo(x, y, c):
     threshold = random.randint(-5, 5)
     passed = 0
     h = 0
@@ -107,5 +117,5 @@ def PLalgo(x, y, c):
     return epochcount
 
 
-PLalgo(smart, effort, classifier)
+Walgo(smart2, effort2, classifier2)
 
