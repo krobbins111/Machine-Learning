@@ -21,22 +21,38 @@
 #perceptron learn and winnow
 #polynomials?
 
-def PLalgo(x[], y[], c[]):
-    threshold = 3
-    pass = 0
+import random
+
+x = {4.4, 2.8, -3, -1.1}
+y = {4.5, 4, -4, -2.7}
+
+def inc(x, y, t, rate):
+    i = 0
+    while(i < x.length()):
+        i = i +1
+
+
+def PLalgo(x, y, c):
+    threshold = 10 *random()
+    passed = 0
     h = 0
-    #formula = (rand*threshold) + (rand*x) + (rand*y) 
-    while(pass < x.length()):
+    learn = 0.5
+    #formula = threshold) + (rand*x) + (rand*y) #nvm
+    while(passed < x.length()):
         i = 0
-        while(i < x.length):
-            #formula = (rand*threshold) + (rand*x[i]) + (rand*y[i])
-            #if formula < 0: h = 0
-            #if formula > 0: h = 1
-            #if h == c[i}:
-                #pass = pass + 1
-                #continue
-            #else:
-                #change of all weights where
+        while(i < x.length()):
+            formula = (threshold) + (x[i]) + (y[i])
+            if formula < 0: h = 0
+            if formula > 0: h = 1
+            if h == c[i]:
+                passed = passed + 1
+            if h == 1 and c[i] == 0:
+                #decrease of all weights additive by learn
+                passed = 0
+            if h == 0 and c[i] == 1:
+                #increase of all weight additive by learn
+                passed = 0
+            i = i + 1
         
 #a way to return the weights. divide from final formula and add to int array
 #along with epoch counter at end of every inner loop
