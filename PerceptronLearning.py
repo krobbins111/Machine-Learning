@@ -23,9 +23,14 @@
 
 import random
 
+#training set 1: No Noise
 smart = [4.4, 2.8, -3, -1.1]
 effort = [4.5, 4, -4, -2.7]
 classifier = [1, 1, 0, 0]
+
+#training set 2: Boundary cases
+
+#training set3: Severe class label noise
 
 #def inc(x, y, t, rate):
  #   i = 0
@@ -49,15 +54,16 @@ def PLalgo(x, y, c):
     threshold = random.randint(-5, 5)
     passed = 0
     h = 0
-    learn = 0.5
+    learn = 0.1
     epochcount = 0
-    w0 = 0.5
-    w1 = 0.5
-    w2 = 0.5
+    w0 = random.random() * 100
+    w1 = random.random() * 100
+    w2 = random.random() * 100
+    print(w0, w1, w2)
     #formula = threshold) + (rand*x) + (rand*y) #nvm
     while(passed < len(x)):
         i = 0
-        if i > 1000:
+        if epochcount > 10000000:
             print('Not Linearly Separable')
             break
         while(i < len(x)):
@@ -65,30 +71,36 @@ def PLalgo(x, y, c):
             print('formula: ')
             print(formula)
             print('\n')
-            if formula < 0: h = 0
+            if formula <= 0: h = 0
             if formula > 0: h = 1
+            print('h and c: ')
+            print(h, c[i])
+            print('\n')
             if h == c[i]:
                 passed = passed + 1
-            if h == 1 and c[i] == 0:
+            elif h == 1 and c[i] == 0:
                 #decrease of all weights additive by learn
-                if w0 != 0: w0 -= learn
-                if w1 != 0: w1 -= learn
-                if w2 != 0: w2 -= learn
+                if x[i] != 0: w1 -= learn
+                if y[i] != 0: w2 -= learn
                 print('Decreased\n')
                 passed = 0
-            if h == 0 and c[i] == 1:
+            elif h == 0 and c[i] == 1:
                 #increase of all weight additive by learn
-                if w0 != 0: w0 += learn
-                if w1 != 0: w1 += learn
-                if w2 != 0: w2 += learn
+                if x[i] != 0: w1 += learn
+                if y[i] != 0: w2 += learn
                 print('Increased\n')
                 passed = 0
+            else: print('Error')
             i = i + 1
-            epochcount += 1
             print('Passed: ')
             print(passed)
             print('\n')
-    print('Epochs: ' + epochcount + '\n')
+        epochcount += 1
+    print('Epochs: ')
+    print(epochcount)
+    print('\n')
+    print(w0, w1, w2)
+    return epochcount
 
 
 PLalgo(smart, effort, classifier)
