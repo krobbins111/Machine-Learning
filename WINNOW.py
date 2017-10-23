@@ -63,7 +63,7 @@ def PLalgo(x, y, c):
     #formula = threshold) + (rand*x) + (rand*y) #nvm
     while(passed < len(x)):
         i = 0
-        if epochcount > 10000000:
+        if epochcount > 10000:
             print('Not Linearly Separable')
             break
         while(i < len(x)):
