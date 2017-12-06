@@ -4,7 +4,7 @@ import random
 
 OPTIMAL     = "Machine Learning"
 DNA_SIZE    = len(OPTIMAL)
-POP_SIZE    = 20
+POP_SIZE    = 50
 GENERATIONS = 100000 # To avoid infinite loop, main will stop when optimal string is found
 
 
@@ -41,9 +41,10 @@ def fitness(dna):
     fitness += abs(ord(dna[c]) - ord(OPTIMAL[c]))
   return fitness
 
+
 def mutate(dna):
   dna_out = ""
-  mutation_chance = 100
+  mutation_chance = 0
   for c in xrange(DNA_SIZE):
     if int(random.random()*mutation_chance) == 1:
       dna_out += random_char()
@@ -51,28 +52,23 @@ def mutate(dna):
       dna_out += dna[c]
   return dna_out
 
+
+
 def mutate2(dna):
   dna_out = ""
-  mutation_chance = 100
-  mutationcount = 0
+  mutation_chance = 25
   for c in xrange(DNA_SIZE):
-    if mutationcount > 1: mutation_chance = -100
     if int(random.random()*mutation_chance) == 1:
-      if int(random.random()*100)%2 == 1:
-        if (ord(dna[c]) + 1) in range(32, 126):
-          dna_out += chr(ord(dna[c]) + 1)
-          mutationcount += 1
-        else:
-          dna_out += dna[c]
+      if int(random.randint(0,1)) == 0 and (ord(dna[c]) + 1) in range(32, 126):
+        dna_out += chr(ord(dna[c]) + 1)
+      elif int(random.randint(0,1)) == 1 and (ord(dna[c]) - 1) in range(32, 126):
+        dna_out += chr(ord(dna[c]) - 1)
       else:
-        if (ord(dna[c]) - 1) in range(32, 126):
-          dna_out += chr(ord(dna[c]) - 1)
-          mutationcount += 1
-        else:
-          dna_out += dna[c]
+        dna_out += dna[c]
     else:
       dna_out += dna[c]
   return dna_out
+
 
 def crossover(dna1, dna2):
   pos = int(random.random()*DNA_SIZE)
@@ -126,9 +122,9 @@ if __name__ == "__main__":
       # Crossover
       ind1, ind2 = crossover(ind1, ind2)
 
-      # Mutate and add back into the population.
-      population.append(mutate2(ind1))
-      population.append(mutate2(ind2))
+      # Mutate and add back into the population.i
+      population.append(mutate(ind1))
+      population.append(mutate(ind2))
 
   # Display the highest-ranked string after all generations have been iterated
   # over. This will be the closest string to the OPTIMAL string, meaning it
